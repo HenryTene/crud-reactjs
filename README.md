@@ -1,23 +1,23 @@
+## Descarga el Proyecto
+```bash
+# instala el proyecto
+$ git clone https://github.com/HenryTene/crud-reactjs
 
-## Configuración del proyecto
+# accede al directorio
+$ cd react-crud-app
 
-En el directorio del proyecto, puede ejecutar:
-
-```
-npm install
+# instala las dependencias
+$ npm install
 # or
-yarn install
-```
+$ yarn install
 
-o
+# Compila y recarga
 
-### Compila y recarga
-```
-npm start
+$ npm start
 # or
-yarn start
-```
+$ yarn start
 
+```
 
 Abra  [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
 
