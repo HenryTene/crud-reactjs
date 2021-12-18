@@ -4,7 +4,7 @@
 $ git clone https://github.com/HenryTene/crud-reactjs
 
 # accede al directorio
-$ cd react-crud-app
+$ cd crud-reactjs
 
 # instala las dependencias
 $ npm install
