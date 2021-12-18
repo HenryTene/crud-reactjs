@@ -1,13 +1,8 @@
-
-import './App.css';
-import Listar from './components/Listar';
-
-
+import "./App.css";
+import Listar from "./components/Listar";
 
 function App() {
-  return (
-    <Listar/>
-  );
+  return <Listar />;
 }
 
 export default App;

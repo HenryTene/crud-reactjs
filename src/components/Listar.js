@@ -9,6 +9,8 @@ function Listar() {
   const [data, setData] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
   const [userToEdit, setUserToEdit] = useState({});
+  const [showCreate, setShowCreate] = useState(false);
+  const [userToCreate, setUserToCreate] = useState({});
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/usuarios").then((result) => {
@@ -29,13 +31,10 @@ function Listar() {
     setShowEdit(true);
   };
 
-  // function handleCreate(){
-  //   axios.post("http://127.0.0.1:8000/api/usuarios/",inputValue)
+  const handleCreate = (user) => {
+    setShowCreate(true);
+  };
 
-
-  // }
-
- 
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -55,9 +54,30 @@ function Listar() {
           </Nav>
         </Container>
       </Navbar>
-      {showEdit && <UserEditor setData={setData} data={data} user={userToEdit} />}
+      {showEdit && (
+        <UserEditor
+          title="Editar"
+          setData={setData}
+          data={data}
+          user={userToEdit}
+          showFunction={setShowEdit}
+        />
+      )}
+      {showCreate && (
+        <UserEditor
+          userToCreate={userToCreate}
+          title="Crear"
+          setData={setData}
+          data={data}
+          user={userToEdit}
+          showFunction={setShowCreate}
+        />
+      )}
       <br />
-      <Button variant="outline-success" onClick={()=>(setShowEdit(true))}>Agregar</Button> <br />
+      <Button variant="outline-success" onClick={handleCreate}>
+        Agregar
+      </Button>{" "}
+      <br />
       {""}
       <Table>
         <thead>
@@ -71,12 +91,12 @@ function Listar() {
         </thead>
         <tbody>
           {data.map((elem) => (
-            <>
-              <tr>
-                <td>{elem.id}</td>
-                <td>{elem.nombre}</td>
-                <td>{elem.apellido}</td>
-                <td>{elem.edad}</td>
+            <tr key={elem.id}>
+              <td>{elem.id}</td>
+              <td>{elem.nombre}</td>
+              <td>{elem.apellido}</td>
+              <td>{elem.edad}</td>
+              <td>
                 <Button
                   variant="outline-primary"
                   size="sm"
@@ -85,6 +105,7 @@ function Listar() {
                   editar
                 </Button>
                 {""}
+
                 <Button
                   variant="outline-danger"
                   size="sm"
@@ -93,8 +114,8 @@ function Listar() {
                   eliminar
                 </Button>
                 {""}
-              </tr>
-            </>
+              </td>
+            </tr>
           ))}
         </tbody>
       </Table>

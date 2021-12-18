@@ -5,8 +5,9 @@ import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 function UserEditor(props) {
-  
-  const [user, setUser] = useState(props.data.filter((element) => element.id === props.user.id)[0]);
+  const [user, setUser] = useState(
+    props.data.filter((element) => element.id === props.user.id)[0]
+  );
   /* const user = props.data.filter((element) => element.id === props.user.id)[0]; */
   const [inputValue, setInputValue] = useState({
     nombre: user ? user.nombre : "",
@@ -14,9 +15,11 @@ function UserEditor(props) {
     edad: user ? user.edad : "",
   });
   useEffect(() => {
-    const filterUser = props.data.filter((element) => element.id === props.user.id)[0];
+    const filterUser = props.data.filter(
+      (element) => element.id === props.user.id
+    )[0];
     setInputValue(filterUser);
-  },[props.user]);
+  }, [props.user]);
 
   function handleChange(e) {
     const value = e.target.value;
@@ -24,28 +27,39 @@ function UserEditor(props) {
     setInputValue({ ...inputValue, [name]: value });
   }
 
-  function handleUpdate(){
-    axios.put(`http://127.0.0.1:8000/api/usuarios/${props.user.id}`,inputValue)
-    .then(() => alert("Cambios actualizados exitosamente"))
-    .then(()=>{
-      // Actualizacion del hook data [{}, {}]
-      const list = props.data.map((e) =>
-        e.id === props.user.id ? { ...e, ...inputValue} : e
-      )
-      props.setData(list)
-      // cambiar el objeto que se actualizo.
-    })
-    
-
-    
+  function handleUpdate() {
+    axios
+      .put(`http://127.0.0.1:8000/api/usuarios/${props.user.id}`, inputValue)
+      .then(() => alert("Cambios actualizados exitosamente"))
+      .then(() => {
+        // Actualizacion del hook data [{}, {}]
+        const list = props.data.map((e) =>
+          e.id === props.user.id ? { ...e, ...inputValue } : e
+        );
+        props.setData(list);
+        props.showFunction(false);
+        // cambiar el objeto que se actualizo.
+      });
   }
 
+  /* function handleCreateUser(){
+    axios.post("http://127.0.0.1:8000/api/usuarios/",userToCreate)
+    .then((result)=>{
+      console.log(result)
+
+    });
+  } */
+
+  function handleClose() {
+    props.showFunction(false);
+    // props.setShowCreate(false)
+  }
 
   console.log(inputValue);
   return (
     <Modal.Dialog>
       <Modal.Header closeButton>
-        <Modal.Title>Modificar</Modal.Title>
+        <Modal.Title>{props.title}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -53,7 +67,7 @@ function UserEditor(props) {
           <InputGroup.Text id="inputGroup-sizing-sm">Nombre</InputGroup.Text>
           <FormControl
             name="nombre"
-            value={inputValue.nombre}
+            value={props.title === "Editar" ? inputValue.nombre : ""}
             onChange={handleChange}
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
@@ -63,7 +77,7 @@ function UserEditor(props) {
           <InputGroup.Text id="inputGroup-sizing-sm">Apellido</InputGroup.Text>
           <FormControl
             name="apellido"
-            value={inputValue.apellido}
+            value={props.title === "Editar" ? inputValue.apellido : ""}
             onChange={handleChange}
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
@@ -73,7 +87,7 @@ function UserEditor(props) {
           <InputGroup.Text id="inputGroup-sizing-sm">Edad</InputGroup.Text>
           <FormControl
             name="edad"
-            value={inputValue.edad}
+            value={props.title === "Editar" ? inputValue.edad : ""}
             onChange={handleChange}
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
@@ -82,8 +96,12 @@ function UserEditor(props) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary">Cerrar</Button>
-        <Button variant="primary" onClick={handleUpdate}>Grabar</Button>
+        <Button variant="secondary" onClick={handleClose}>
+          Cerrar
+        </Button>
+        <Button variant="primary" onClick={handleUpdate}>
+          Grabar
+        </Button>
       </Modal.Footer>
     </Modal.Dialog>
   );
