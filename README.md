@@ -1,3 +1,30 @@
+
+## Configuración del proyecto
+
+En el directorio del proyecto, puede ejecutar:
+
+```
+npm install
+# or
+yarn install
+```
+
+o
+
+### Compila y recarga
+```
+npm start
+# or
+yarn start
+```
+
+
+Abra  [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
+
+La página se recargará si realiza modificaciones.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
