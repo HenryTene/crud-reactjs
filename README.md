@@ -8,13 +8,13 @@ $ cd crud-reactjs
 
 # instala las dependencias
 $ npm install
-# or
+# o
 $ yarn install
 
 # Compila y recarga
 
 $ npm start
-# or
+# o
 $ yarn start
 
 ```
