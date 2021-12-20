@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
 
 function UserCreate(props) {
   const [user, setUser] = useState(false);
