@@ -1,3 +1,30 @@
+## Descarga el Proyecto
+```bash
+# instala el proyecto
+$ git clone https://github.com/HenryTene/crud-reactjs
+
+# accede al directorio
+$ cd crud-reactjs
+
+# instala las dependencias
+$ npm install
+# o
+$ yarn install
+
+# Compila y recarga
+
+$ npm start
+# o
+$ yarn start
+
+```
+
+Abra  [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
+
+La página se recargará si realiza modificaciones.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
