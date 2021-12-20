@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Navbar, Nav, Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import UserEditor from "./UserEditor";
+import UserCreate from "./UserCreate";
 
 function Listar() {
   const [data, setData] = useState([]);
@@ -11,13 +12,17 @@ function Listar() {
   const [userToEdit, setUserToEdit] = useState({});
   const [showCreate, setShowCreate] = useState(false);
   const [userToCreate, setUserToCreate] = useState({});
+  const [inputValue, setInputValue] = useState({
+    nombre: "",
+    apellido: "",
+    edad: "",
+  });
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/usuarios").then((result) => {
-      //console.log(result);
       setData(result.data);
     });
-  }, []);
+  }, [data]);
 
   function handleDelete(id) {
     axios.delete(`http://127.0.0.1:8000/api/usuarios/${id}`).then((result) => {
@@ -61,16 +66,21 @@ function Listar() {
           data={data}
           user={userToEdit}
           showFunction={setShowEdit}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
         />
       )}
       {showCreate && (
-        <UserEditor
+        <UserCreate
           userToCreate={userToCreate}
           title="Crear"
           setData={setData}
           data={data}
           user={userToEdit}
           showFunction={setShowCreate}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          setUserToCreate={setUserToCreate}
         />
       )}
       <br />
